@@ -71,38 +71,23 @@
         // 간단한 회원가입 함수입니다.
         // 아이디, 비밀번호, 닉네임을 받아 DB에 저장합니다.
         function join() {
-            let id = $('#userid').val()
-            let pw = $('#userpw').val()
-            let pw2 = $('#userpw2').val()
-            let nick = $('#usernick').val()
-            if (id == "") {
-                alert("아이디를 입력해주세요")
-            } else if (pw == "") {
-                alert("비밀번호를 입력해주세요")
-            } else if (pw2 == "") {
-                alert("비밀번호 재입력을 입력해주세요")
-            } else if (nick == "") {
-                alert("닉네임을 입력해주세요")
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: "/api/join",
-                    data: {
-                        id_give: id,
-                        pw_give: pw,
-                        nickname_give: nick
-                    },
-                    success: function (response) {
-                        if (response['result'] == 'success') {
-                            alert('회원가입이 완료되었습니다.')
-                            window.location.href = '/login'
-                        } else {
-                            alert(response['msg'])
-                        }
+            $.ajax({
+                type: "POST",
+                url: "/api/join",
+                data: {
+                    id_give: $('#userid').val(),
+                    pw_give: $('#userpw').val(),
+                    nickname_give: $('#usernick').val()
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert('회원가입이 완료되었습니다.')
+                        window.location.href = '/login'
+                    } else {
+                        alert(response['msg'])
                     }
-
-                })
-            }
+                }
+            })
         }
 
     </script>
